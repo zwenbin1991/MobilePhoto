@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+.photo-list {
+    position: relative;
+    background: #fff;
+}
+
+.photo-list .grid-photo-cell {
+    position: absolute;
+    width: 50%;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+.photo-list .grid-photo-cell:nth-child(odd) {
+    padding-right: .1rem;
+}
+
+.photo-list .grid-photo-cell:nth-child(even) {
+    padding-left: .1rem;
+}
+
+.photo-list .grid-photo-cell > div {
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: cover;
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "imgPath": "http://localhost:8080/img/1.jpg",
+    "largeImgPath": "http://localhost:8080/img/1.large.jpg",
+    "width": 352,
+    "height": 220
+  },
+  {
+    "imgPath": "http://localhost:8080/img/2.jpg",
+    "largeImgPath": "http://localhost:8080/img/2.large.jpg",
+    "width": 247,
+    "height": 220
+  },
+  {
+    "imgPath": "http://localhost:8080/img/3.jpg",
+    "largeImgPath": "http://localhost:8080/img/3.large.jpg",
+    "width": 480,
+    "height": 300
+  },
+  {
+    "imgPath": "http://localhost:8080/img/4.jpg",
+    "largeImgPath": "http://localhost:8080/img/4.large.jpg",
+    "width": 480,
+    "height": 300
+  },
+  {
+    "imgPath": "http://localhost:8080/img/1.jpg",
+    "largeImgPath": "http://localhost:8080/img/1.large.jpg",
+    "width": 352,
+    "height": 220
+  },
+  {
+    "imgPath": "http://localhost:8080/img/2.jpg",
+    "largeImgPath": "http://localhost:8080/img/2.large.jpg",
+    "width": 247,
+    "height": 220
+  },
+  {
+    "imgPath": "http://localhost:8080/img/3.jpg",
+    "largeImgPath": "http://localhost:8080/img/3.large.jpg",
+    "width": 480,
+    "height": 300
+  },
+  {
+    "imgPath": "http://localhost:8080/img/4.jpg",
+    "largeImgPath": "http://localhost:8080/img/4.large.jpg",
+    "width": 480,
+    "height": 300
+  },
+  {
+    "imgPath": "http://localhost:8080/img/2.jpg",
+    "largeImgPath": "http://localhost:8080/img/2.large.jpg",
+    "width": 247,
+    "height": 220
+  },
+  {
+    "imgPath": "http://localhost:8080/img/4.jpg",
+    "largeImgPath": "http://localhost:8080/img/4.large.jpg",
+    "width": 480,
+    "height": 300
+  },
+  {
+    "imgPath": "http://localhost:8080/img/4.jpg",
+    "largeImgPath": "http://localhost:8080/img/4.large.jpg",
+    "width": 480,
+    "height": 300
+  },
+  {
+    "imgPath": "http://localhost:8080/img/2.jpg",
+    "largeImgPath": "http://localhost:8080/img/2.large.jpg",
+    "width": 247,
+    "height": 220
+  }
+]

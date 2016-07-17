@@ -1,0 +1,11 @@
+<div class="photo-list">
+    <% for (var i = 0, length = photos.length; i < length; i++) { %>
+        <div class="grid-photo-cell js-photo">
+            <div data-imgpath="<%= photos[i].imgPath %>"
+                 data-largeimgpath="<%= photos[i].largeImgPath %>"
+                 data-width="<%= photos[i].width %>"
+                 data-height="<%= photos[i].height %>"
+            ></div>
+        </div>
+    <% } %>
+</div>
