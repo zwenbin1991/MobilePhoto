@@ -54,6 +54,7 @@ Hash.prototype._hashChangeListener = function () {
 };
 
 Hash.prototype.reg = function (moduleName, module) {
+    module.hashChangeWillHandler = this.option.hashChangeWillHandler;
     (this.hashObject || (this.hashObject = {}))[moduleName] = module;
 
     return this;

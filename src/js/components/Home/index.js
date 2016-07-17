@@ -18,8 +18,8 @@ export default Object.create({
         // 路由响应
         new Hash({
             defaultPage: 'photo',
-            hashChangeWillHandler: function (method, args, context) {
-                element.innerHTML = method.apply(context, args);
+            hashChangeWillHandler: function (context) {
+                element.innerHTML = context;
             }
         }).reg('photo', mPhoto)
           .run();

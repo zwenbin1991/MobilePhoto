@@ -47,7 +47,7 @@ Photo.prototype._scrollListener = () => {};
 
 Photo.prototype._willRender = function () {
     this._getAll()
-        .then(photos => this._render(), error => console.log(error));
+        .then(photos => this.hashChangeWillHandler(this._render()), error => console.log(error));
 };
 
 Photo.prototype._render = (photos) => {
