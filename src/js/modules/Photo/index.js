@@ -9,19 +9,20 @@
 import $ from 'jquery';
 import './photo.css';
 
-import tPhoto from 'ejs!./photo.ejs';
+import tempPresetCompileFunc from './photo.handlebars';
 import tap from 'lib/tap';
+import Waterfall from 'lib/waterfall';
 
-
-function Photo (selector, dataPath) {
-    this.selector = selector;
+function Photo (columnCount, dataPath) {
+    this.selector = '.grid-photo-cell';
+    this.jsOperaSelector = '.js-photo';
     this.parentSelector = '.photo-list';
+    this.columnCount = columnCount || 2;
     this.dataPath = dataPath || '/data.json';
 }
 
 Photo.prototype.init = function () {
     this._willRender();
-    this._bindEvents();
 };
 
 Photo.prototype._getAll = function () {
@@ -34,24 +35,53 @@ Photo.prototype._getAll = function () {
     });
 };
 
-Photo.prototype._bindEvents = function () {
-    // 绑定element tap事件
-    tap(this.selector, function (e) {
-        console.log('挖掘机');
-    });
+Photo.prototype._getHeightWidthRatio = (height, width) => height / width;
+
+Photo.prototype._initialHeight = function () {
+    Array.prototype.slice.call(document.querySelectorAll(this.selector))
+        .forEach(element => {
+            const firstElementChild = element.firstElementChild;
+            const heightWidthRation = this._getHeightWidthRatio(parseInt(firstElementChild.dataset.height), parseInt(firstElementChild.dataset.width));
+            firstElementChild.style['padding-top'] = (heightWidthRation * 100).toFixed(2) + '%';
+        });
 };
 
-Photo.prototype._tapListener = () => {};
+Photo.prototype._initialWaterfall = function () {
+    this.waterfall = new Waterfall(this.jsOperaSelector, this.columnCount);
+    this.waterfall.calcElementPosition();
+    this.waterfall.lazyLoad();
+};
 
-Photo.prototype._scrollListener = () => {};
+Photo.prototype._bindEvents = function () {
+    // 绑定element tap事件
+    tap(this.parentSelector, this._tapListener.bind(this));
+
+    // 绑定scroll事件
+    window.onscroll = this._scrollListener.bind(this);
+};
+
+Photo.prototype._tapListener = function (e) {};
+
+Photo.prototype._scrollListener = function (e) {
+    this.waterfall.lazyLoad();
+};
 
 Photo.prototype._willRender = function () {
     this._getAll()
-        .then(photos => this.hashChangeWillHandler(this._render()), error => console.log(error));
+        .then(photos => {
+            this.hashChangeDidHandler(this._render(photos));
+            this._didRender();
+        }, error => this.hashChangeDidHandler(this._render(error)));
 };
 
-Photo.prototype._render = (photos) => {
-    return 'photo';
+Photo.prototype._render = photos => {
+    return tempPresetCompileFunc({ photos: photos  });
+};
+
+Photo.prototype._didRender = function () {
+    this._bindEvents();
+    this._initialHeight();
+    this._initialWaterfall();
 };
 
 export default Photo;

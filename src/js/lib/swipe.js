@@ -9,9 +9,6 @@
 import $ from 'jquery';
 
 function Swipe (options) {
-    if (Object.getPrototypeOf(this) !== Swipe.prototype)
-        return new Swipe(options);
-
     const defaultOptions = {
         parentSelector: '.page-container',          // 页父容器选择器
         pageSelector: '.page',                      // 页选择器

@@ -9,7 +9,6 @@
     position: absolute;
     width: 50%;
     box-sizing: border-box;
-    pointer-events: none;
 }
 
 .photo-list .grid-photo-cell:nth-child(odd) {

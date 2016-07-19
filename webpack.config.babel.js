@@ -36,10 +36,24 @@ export default {
                 },
                 exclude: /node_modules/
             }, {
+                test: /\.html/i,
+                loader: 'raw',
+                exclude: /node_modules/
+            }, {
                 test: /\.ejs/i,
-                loader: 'ejs'
+                loader: 'ejs-compiled?htmlmin',
+            }, {
+                test: /\.handlebars/i,
+                loader: 'handlebars'
             }
         ]
+    },
+
+    'ejs-compiled-loader': {
+        htmlmin: true,
+        htmlminOptions: {
+            removeComments: true
+        }
     },
 
     resolve: {
@@ -49,7 +63,7 @@ export default {
             modules: path.join(__dirname, 'src', 'js', 'modules'),
             lib: path.join(__dirname, 'src', 'js', 'lib')
         },
-        extensions: ['', '.js', '.css', '.ejs']
+        extensions: ['', '.js', '.css', '.html']
     },
 
     plugins: [

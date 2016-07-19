@@ -8,15 +8,12 @@
 
 import $ from 'jquery';
 
-function Waterfall (selector) {
-    if (Object.getPrototypeOf(this) !== Waterfall.prototype)
-        return new Waterfall(selector);
-
+function Waterfall (selector, columnCount) {
     this.selector = selector;
     this.elements = $(selector);
     this.parent = this.elements.parent();
+    this.columnCount = columnCount;
     this.columnHeight = [];
-    this.columnCount = 2;
     this.columnVerticalGap = 0.2;
     this.unit = 'rem';
 }
@@ -28,9 +25,7 @@ function Waterfall (selector) {
  * @param {jqObject} element jquery对象
  * @return {Number} 相对于body的top
  */
-Waterfall.prototype._getCurrentElementOffsetTop = element => {
-    return element.offset().top;
-};
+Waterfall.prototype._getCurrentElementOffsetTop = element => element.offset().top;
 
 /**
  * 高阶函数，遍历当前className === this.selector的元素，减少冗余代码
@@ -106,22 +101,23 @@ Waterfall.prototype._detectElementOffsetTop = (element, offsetTop) => {
     const deltaY = offsetTop - scrollTop;
 
     // 当元素距离窗口的top小于窗口的高度并且滑动距离
-    return deltaY < $(window).height() && (offsetTop + element.outerHeight(true)) > scrollTop;
+    return deltaY < $(window).height()
+           && (offsetTop + element.outerHeight(true)) > scrollTop;
 };
 
 /**
  * 懒加载
  */
-Waterfall.prototype.lazyLoad = Waterfall.prototype._iterateeElements(function (element) {
+Waterfall.prototype.lazyLoad = Waterfall.prototype._iterateeElements(function (element, index) {
     const offsetTop = this._getCurrentElementOffsetTop(element);
     let firstChild;
 
     if (this._detectElementOffsetTop(element, offsetTop)) {
         firstChild = element.children().eq(0);
-
         this._removeProperty(
-            firstChild.css('background-image', 'url("'+ this._getProperty(firstChild, 'data-imgpath') +'")'),
-            'data-imgpath'
+            firstChild.css(
+                'background-image', 'url("'+ this._getProperty(firstChild, 'data-imgpath') +'")'),
+                'data-imgpath'
         );
         this._removeClassName(element, this.selector.slice(1));
     }
@@ -132,6 +128,7 @@ Waterfall.prototype.lazyLoad = Waterfall.prototype._iterateeElements(function (e
  */
 Waterfall.prototype.calcElementPosition = Waterfall.prototype._iterateeElements(function (element, index) {
     let fontSize = parseInt(document.documentElement.style.fontSize);
+    let parent = this.parent;
     let minHeight, maxHeight, minHeightColumnIndex, left, top;
 
     if (index < this.columnCount) {
@@ -146,7 +143,7 @@ Waterfall.prototype.calcElementPosition = Waterfall.prototype._iterateeElements(
         this.columnHeight[minHeightColumnIndex] += element.outerHeight(true);
     }
     maxHeight = Math.max.apply(Math, this.columnHeight);
-    this.parent.height(maxHeight);
+    parent.css('height', maxHeight);
     element.css({ left: left, top: top });
 });
 

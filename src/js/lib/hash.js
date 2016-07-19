@@ -9,7 +9,7 @@
 const defaultOption = {
     splitter: '!',
     defaultPage: 'index',
-    hashChangeWillHandler: function (method, args, context) {}
+    hashChangeDidHandler: function (method, args, context) {}
 };
 
 const extend = (target, source, deep) => {
@@ -54,7 +54,7 @@ Hash.prototype._hashChangeListener = function () {
 };
 
 Hash.prototype.reg = function (moduleName, module) {
-    module.hashChangeWillHandler = this.option.hashChangeWillHandler;
+    module.hashChangeDidHandler = this.option.hashChangeDidHandler;
     (this.hashObject || (this.hashObject = {}))[moduleName] = module;
 
     return this;

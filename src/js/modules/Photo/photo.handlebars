@@ -1,0 +1,12 @@
+{{! 图片}}
+<div class="photo-list">
+    {{#each photos}}
+        <div class="grid-photo-cell js-photo">
+            <div data-imgpath="{{this.imgPath}}"
+                 data-imglargepath="{{this.largeImgPath}}"
+                 data-width="{{this.width}}"
+                 data-height="{{this.height}}"
+            ></div>
+        </div>
+    {{/each}}
+</div>
