@@ -115,9 +115,8 @@ Waterfall.prototype.lazyLoad = Waterfall.prototype._iterateeElements(function (e
     if (this._detectElementOffsetTop(element, offsetTop)) {
         firstChild = element.children().eq(0);
         this._removeProperty(
-            firstChild.css(
-                'background-image', 'url("'+ this._getProperty(firstChild, 'data-imgpath') +'")'),
-                'data-imgpath'
+            firstChild.css('background-image', 'url("'+ this._getProperty(firstChild, 'data-imgpath') +'")'),
+            'data-imgpath'
         );
         this._removeClassName(element, this.selector.slice(1));
     }
