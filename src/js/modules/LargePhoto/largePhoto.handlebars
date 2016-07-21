@@ -1,0 +1,13 @@
+<div class="large-photo">
+    <div class="large-photo-list-blk clearfix">
+        {{#each presetLargePhotos}}
+            <div class="grid-large-photo-cell" style="
+                background-image: url({{ this.backgroundImage }});
+                margin-left: {{ this.marginLeft }}px;
+                margin-top: {{ this.marginTop }}px;
+                width: {{ this.width }}px;
+                height: {{ this.height }}px
+            "></div>
+        {{/each}}
+    </div>
+</div>

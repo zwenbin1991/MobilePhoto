@@ -22,9 +22,12 @@ function Tap (selector, handler) {
         startX = touch.pageX;
         startY = touch.pageY;
         prevTimeStamp = e.timeStamp;
+
+        e.stopPropagation();
+        e.preventDefault();
     }, false);
 
-    element.addEventListener('touchmove', () => {
+    element.addEventListener('touchmove', e => {
         if (touch) {
             const deltaX = touch.pageX - startX;
             const deltaY = touch.pageY - startY;
@@ -32,6 +35,9 @@ function Tap (selector, handler) {
             isTriggerSwipe = Math.abs(deltaX) / deviceWidth < swipeDeltaTimes &&
                 Math.abs(deltaY) / deviceHeight < swipeDeltaTimes;
         }
+
+        e.stopPropagation();
+        e.preventDefault();
     }, false);
 
     element.addEventListener('touchend', e => {
@@ -39,6 +45,9 @@ function Tap (selector, handler) {
 
         if (isTriggerSwipe && currTimeStamp - prevTimeStamp <= delay)
             handler.call(doc, e);
+
+        e.stopPropagation();
+        e.preventDefault();
     }, false);
 }
 

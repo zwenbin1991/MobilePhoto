@@ -36,11 +36,22 @@
     </style>
 </head>
 <body>
-
+    <div id="xx" style="width: 1000px; height: 100px; background: green">
+        <div id="md" style="position: fixed; left: 0; top: 0; width: 50%; height: 50%; background: red"></div>
+    </div>
     <script>
-        window.addEventListener('hashchange', function () {
-            console.log(location.hash);
+        var md = document.getElementById('md');
+        var xx = document.getElementById('xx');
+        md.addEventListener('click', function (e) {
+            console.log('md');
         }, false);
+        xx.addEventListener('click', function () {
+            console.log('xx');
+        }, false);
+        document.addEventListener('click', function () {
+            console.log('document');
+        }, false);
+
     </script>
 </body>
 </html>
